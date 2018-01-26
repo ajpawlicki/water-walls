@@ -22,4 +22,4 @@ While iterating through heights, find max height to the left and max height to t
 * Iterate through waterBlocks array and find maxBlocks, leftWall, and rightWall
 
 ### Time complexity
-0(n^2)
+0(n^2) (because of search for right max)
