@@ -2,9 +2,11 @@
   "name": "water-walls",
   "version": "1.0.0",
   "description": "Find the max number of water blocks between two walls.",
-  "main": "get-max-water.js",
+  "main": "get-max-water-blocks.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node server/app.js",
+    "server-dev": "nodemon server/app.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +20,8 @@
   "homepage": "https://github.com/ajpawlicki/water-walls#readme",
   "devDependencies": {
     "jest": "^22.1.4"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
   }
 }
