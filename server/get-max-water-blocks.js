@@ -30,9 +30,10 @@ const getMaxWaterBlocks = heights => {
 const getWaterBlocks = heights => {
   const waterBlocks = [];
   let leftMaxHeight = 0;
+  const rightMaxHeights = getRightMaxHeights(heights);
 
   for (let i = 0; i < heights.length; i++) {
-    const minOfHeights = Math.min(leftMaxHeight, getRightMaxHeight(heights, i + 1));
+    const minOfHeights = Math.min(leftMaxHeight, rightMaxHeights[i]);
     
     waterBlocks[i] = Math.max(0, minOfHeights - heights[i]);
 
@@ -54,8 +55,22 @@ const getRightMaxHeight = (heights, start) => {
   return rightMaxHeight;
 };
 
+const getRightMaxHeights = heights => {
+  const rightMaxHeights = [];
+  let rightMaxHeight = 0;
+
+  for (let i = heights.length - 1; i >= 0; i--) {
+    rightMaxHeights[i] = rightMaxHeight;
+    
+    rightMaxHeight = Math.max(rightMaxHeight, heights[i]);
+  }
+
+  return rightMaxHeights;
+}
+
 module.exports = {
   getRightMaxHeight,
+  getRightMaxHeights,
   getMaxWaterBlocks,
   getWaterBlocks
 };
