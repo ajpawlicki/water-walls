@@ -20,20 +20,20 @@ body {
   margin: 1px;
 }
 
-.grid-wall-block {
-  background-color: #c0c0c0;
-}
-
-.grid-water-block {
-  background-color: #0000ff;
-}
-
-.grid-black-block {
-  background-color: #000000;
-}
-
 .grid-block {
   height: 20px;
   width: 20px;
   margin: 1px;
+}
+
+.gray-wall-block {
+  background-color: #c0c0c0;
+}
+
+.water-block {
+  background-color: #0000ff;
+}
+
+.black-wall-block {
+  background-color: #000000;
 }
