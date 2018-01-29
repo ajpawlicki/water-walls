@@ -1,9 +1,9 @@
 const getMaxWaterBlocks = heights => {
-  if (!heights || heights.length < 3) throw new Error('Need an input array length of at least 3.');
+  // if (!heights || heights.length < 3) throw new Error('Need an input array length of at least 3.');
   
   let leftWall = 0;
-  let rightWall = 0;
-  let maxLeftWall = 0;
+  let rightWall = null;
+  let maxLeftWall = null;
   let maxWaterBlocks = 0;
   let currentWaterBlocks = 0
 
@@ -13,12 +13,12 @@ const getMaxWaterBlocks = heights => {
     if (waterBlocks[i] === 0) {
       if (currentWaterBlocks > maxWaterBlocks) {
         maxWaterBlocks = currentWaterBlocks;
-        rightWall = i + 1;
+        rightWall = i;
         maxLeftWall = leftWall;
       }
 
       currentWaterBlocks = 0;
-      leftWall = i + 1;
+      leftWall = i;
     } else {
       currentWaterBlocks += waterBlocks[i];
     }
