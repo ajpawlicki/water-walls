@@ -11,10 +11,10 @@ window.onload = () => {
     if (inputString.trim().length > 0 && isValidInput(inputString)) {
       const heights = convertInputStringToHeightsArray(inputString);
 
-      if (checkHeightsLimit(heights, 100)) {
+      if (heights.length <= 40 && checkHeightsLimit(heights, 100)) {
         fetchWaterWalls(heights, gridEl);
       } else {
-        console.error('Input is too large. Please try smaller integer.');
+        console.error('Input is too large. Please try smaller or less integers.');
       }
 
     } else {
