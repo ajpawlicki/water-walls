@@ -11,7 +11,12 @@ window.onload = () => {
     if (inputString.trim().length > 0 && isValidInput(inputString)) {
       const heights = convertInputStringToHeightsArray(inputString);
 
-      renderHeights(heights, gridEl);
+      if (checkHeightsLimit(heights, 100)) {
+        fetchWaterWalls(heights, gridEl);
+      } else {
+        console.error('Input is too large. Please try smaller integer.');
+      }
+
     } else {
       console.error('Please input comma separated list of integers.');
     }
@@ -35,38 +40,58 @@ const convertInputStringToHeightsArray = inputString => {
     .filter(num => !Number.isNaN(num));
 };
 
+const checkHeightsLimit = (heights, limit) => {
+  for (let height of heights) {
+    if (height > limit) return false;
+  }
+
+  return true;
+};
+
 const emptyElement = el => {
   while (el.firstElementChild) {
     el.firstElementChild.remove();
   }
 };
 
-const renderHeights = (heights, gridEl) => {
+const fetchWaterWalls = (heights, gridEl) => {
+  fetch(`fetchWaterWalls?heights=${JSON.stringify(heights)}`)
+  .then(res => res.json())
+  .then(data => {
+    renderWaterWalls(data, gridEl);
+  })
+  .catch(err => console.error(err));
+};
+
+const renderWaterWalls = (waterWalls, gridEl) => {
   emptyElement(gridEl);
 
-  for (let height of heights) {
+  for (let wallData of waterWalls) {
+    const { height, water, isLeftWall, isRightWall } = wallData;
+    
     const colEl = document.createElement('div');
     colEl.classList.add('grid-col');
 
     for (let i = 0; i < height; i++) {
       const wallEl = document.createElement('div');
-      wallEl.classList.add('grid-block', 'grid-wall-block');
+      wallEl.classList.add('grid-block');
+
+      if (isLeftWall || isRightWall) {
+        wallEl.classList.add('black-wall-block');
+      } else {
+        wallEl.classList.add('gray-wall-block');
+      }
 
       colEl.appendChild(wallEl);
     }
 
-    const waterEl = document.createElement('div');
-    waterEl.classList.add('grid-block', 'grid-water-block');
-    colEl.appendChild(waterEl);
+    for (let i = 0; i < water; i++) {
+      const waterEl = document.createElement('div');
+      waterEl.classList.add('grid-block', 'water-block');
+      
+      colEl.appendChild(waterEl);      
+    }
 
     gridEl.appendChild(colEl);
   }
-};
-
-const fetchWaterBlocks = heights => {
-
-};
-
-const renderWaterBlocks = heights => {
-
 };
