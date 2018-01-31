@@ -1,6 +1,6 @@
 const getMaxWaterBlocks = require('./get-max-water-blocks-2');
 
-describe('Testing linear implementation of getMaxWaterBlocks', () => {
+describe('Testing two pointer implementation of getMaxWaterBlocks', () => {
   
   xdescribe('getMaxWaterBlocks', () => {
     it('Throws an error if input array is undefined or input array length is less than 3', () => {
