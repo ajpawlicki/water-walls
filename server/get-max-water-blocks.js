@@ -1,6 +1,4 @@
-const getMaxWaterBlocks = heights => {
-  // if (!heights || heights.length < 3) throw new Error('Need an input array length of at least 3.');
-  
+const getMaxWaterBlocks = heights => {  
   let leftWall = 0;
   let rightWall = null;
   let maxLeftWall = null;
@@ -43,18 +41,6 @@ const getWaterBlocks = heights => {
   return waterBlocks;
 };
 
-const getRightMaxHeight = (heights, start) => {
-  if (start >= heights.length) return 0;
-
-  let rightMaxHeight = heights[start];
-  
-  for (let i = start + 1; i < heights.length; i++) {
-    rightMaxHeight = Math.max(heights[i], rightMaxHeight);
-  }
-
-  return rightMaxHeight;
-};
-
 const getRightMaxHeights = heights => {
   const rightMaxHeights = [];
   let rightMaxHeight = 0;
@@ -69,7 +55,6 @@ const getRightMaxHeights = heights => {
 }
 
 module.exports = {
-  getRightMaxHeight,
   getRightMaxHeights,
   getMaxWaterBlocks,
   getWaterBlocks
